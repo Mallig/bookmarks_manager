@@ -18,10 +18,11 @@ describe Bookmark do
     expect(Bookmark.all).to include '2 www.google.com'
     expect(Bookmark.all).to include '3 www.reddit.com'
   end
-# 
-# it 'can add to a database' do
-#
-# end
+  
+#  it 'can add to a database' do
+#    Bookmark.create("www.makersacademy.com")
+#    expect()
+#  end
 # 
 # it 'can update database entries' do
 #

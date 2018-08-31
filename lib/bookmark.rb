@@ -19,8 +19,9 @@ class Bookmark
     rs.map { |row| "%s %s" % [ row['id'], row['url'] ] }
   end
 
-  def self.create(url)
-    
-  end
+# def self.create(url)
+#   
+# end
+
   
 end

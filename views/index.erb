@@ -5,5 +5,13 @@
 </head>
 
 <body>
-  <form action="/bookmarks" method="get"><input type="submit" value="Show Bookmarks"></form>
+  <form action="/save_bookmark" method="POST">
+    <label for="url">Enter a url to save:</label>
+    <input type="text" name='url'>
+    <input type="submit" value="Save URL">
+  </form>
+
+  <form action="/bookmarks" method="get">
+    <input type="submit" value="Show Bookmarks">
+  </form>
 </body>

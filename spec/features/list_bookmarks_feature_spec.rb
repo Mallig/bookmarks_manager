@@ -1,5 +1,4 @@
 require './app'
-require 'pg'
 
 feature 'bookmark list' do
 
