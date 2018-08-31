@@ -5,11 +5,17 @@
 </head>
 
 <body>
+  
+  <% flash.keys.each do |type| %>
+    <div data-alert class="flash <%= type %> alert-box radius">
+      <%= flash[type] %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
+
   <form action="/save_bookmark" method="POST">
     <label for="url">Enter a url to save:</label>
     <input type="text" name='url'>
-    <label for="id">Enter an ID:</label>
-    <input type="text" name='id'>
     <input type="submit" value="Save URL">
   </form>
 

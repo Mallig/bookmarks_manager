@@ -1,4 +1,5 @@
 require 'pg'
+require 'uri'
 
 class Bookmark
 
@@ -19,9 +20,15 @@ class Bookmark
     rs.map { |row| "%s %s" % [ row['id'], row['url'] ] }
   end
 
-  def self.create(id, url)
-    @@conn.exec( "INSERT INTO bookmarks VALUES (#{id}, '#{url}')")
+  def self.create(url)
+    return false unless valid_url?(url)
+    @@conn.exec( "INSERT INTO bookmarks (url) VALUES ('#{url}')")
   end
 
+  private
+
+  def self.valid_url?(url)
+    url =~ /\A#{URI::regexp(['http', 'https'])}\z/
+  end
   
 end

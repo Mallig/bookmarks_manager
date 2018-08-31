@@ -14,14 +14,14 @@ describe Bookmark do
 
   it 'can read from a database' do
     add_test_bookmarks
-    expect(Bookmark.all).to include '1 www.makersacademy.com'
-    expect(Bookmark.all).to include '2 www.google.com'
-    expect(Bookmark.all).to include '3 www.reddit.com'
+    expect(Bookmark.all[0]).to include 'http://www.makersacademy.com'
+    expect(Bookmark.all[1]).to include 'http://www.google.com'
+    expect(Bookmark.all[2]).to include 'http://www.reddit.com'
   end
   
   it 'can add to a database' do
-    Bookmark.create(1, "www.makersacademy.com")
-    expect(Bookmark.all).to include '1 www.makersacademy.com'
+    Bookmark.create("http://www.makersacademy.com")
+    expect(Bookmark.all[0]).to include 'http://www.makersacademy.com'
   end
 # 
 # it 'can update database entries' do
