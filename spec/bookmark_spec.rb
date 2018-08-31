@@ -1,7 +1,39 @@
 require 'bookmark'
+require 'web_helper'
 
 describe Bookmark do
-  it 'has a list of bookmarks' do
-    expect(Bookmark.all).to eq []
+
+# it 'can access to a database' do
+#   expect(Bookmark.conn).to be_a(# PG connection type ?)
+# end
+
+  before(:each) do
+    clear_test_database
   end
+
+  context 'when testing' do
+    it 'will connect to a test database for tests' do
+      expect(Bookmark.db).to eq 'bookmark_manager_test'
+    end
+  end
+
+  it 'can read from a database' do
+    add_test_bookmarks
+    expect(Bookmark.all).to include '1 www.makersacademy.com'
+    expect(Bookmark.all).to include '2 www.google.com'
+    expect(Bookmark.all).to include '3 www.reddit.com'
+  end
+# 
+# it 'can add to a database' do
+#
+# end
+# 
+# it 'can update database entries' do
+#
+# end
+# 
+# it 'can delete database entries' do
+#   
+# end
+
 end

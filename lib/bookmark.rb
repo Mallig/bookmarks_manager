@@ -1,8 +1,23 @@
+require 'pg'
+
 class Bookmark
 
-  # thanks stackoverflow, check out this module later
+  @@db = "bookmark_manager#{ '_test' if ENV['RACK_ENV'] == 'test' }"
+  @@conn = PG.connect( :dbname => @@db )
+  
+  def self.db
+    @@db
+  end
+
+  def self.conn
+    @@conn
+  end
+
   def self.all
-    ObjectSpace.each_object(self).to_a
+    # @@conn or conn ?
+    rs = @@conn.exec( "SELECT * FROM bookmarks ORDER BY id;" )
+    rs.map { |row| "%s %s" % [ row['id'], row['url'] ] }
+    
   end
   
 end
