@@ -19,9 +19,9 @@ class Bookmark
     rs.map { |row| "%s %s" % [ row['id'], row['url'] ] }
   end
 
-# def self.create(url)
-#   
-# end
+  def self.create(id, url)
+    @@conn.exec( "INSERT INTO bookmarks VALUES (#{id}, '#{url}')")
+  end
 
   
 end
