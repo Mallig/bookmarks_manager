@@ -1,11 +1,7 @@
 require './app'
 require 'pg'
 
-
 feature 'bookmark list' do
-  before(:each) do
-    clear_test_database
-  end
 
   scenario 'can output users bookmarks' do
     add_test_bookmarks

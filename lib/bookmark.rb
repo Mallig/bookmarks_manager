@@ -17,6 +17,9 @@ class Bookmark
     # @@conn or conn ?
     rs = @@conn.exec( "SELECT * FROM bookmarks ORDER BY id;" )
     rs.map { |row| "%s %s" % [ row['id'], row['url'] ] }
+  end
+
+  def self.create(url)
     
   end
   

@@ -1,15 +1,10 @@
 require 'bookmark'
-require 'web_helper'
 
 describe Bookmark do
 
 # it 'can access to a database' do
 #   expect(Bookmark.conn).to be_a(# PG connection type ?)
 # end
-
-  before(:each) do
-    clear_test_database
-  end
 
   context 'when testing' do
     it 'will connect to a test database for tests' do
