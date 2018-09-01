@@ -2,10 +2,21 @@ require 'pg'
 require 'uri'
 
 class Bookmark
+  attr_reader :id, :url, :title
 
   @@db = "bookmark_manager#{ '_test' if ENV['RACK_ENV'] == 'test' }"
   @@conn = PG.connect( :dbname => @@db )
   
+  # *** INSTANCE METHODS ***
+
+  def initialize(id, url, title)
+    @id = id
+    @url = url
+    @title = title
+  end
+
+  # *** CLASS METHODS ***
+
   def self.db
     @@db
   end
@@ -16,13 +27,17 @@ class Bookmark
 
   def self.all
     # @@conn or conn ?
-    rs = @@conn.exec( "SELECT * FROM bookmarks ORDER BY id;" )
-    rs.map { |row| "%s %s" % [ row['id'], row['url'] ] }
+    rs = @@conn.exec( "SELECT * FROM bookmarks;" )
+    rs.map do |bookmark|
+      Bookmark.new(bookmark['id'], bookmark['url'], bookmark['title'])
+    end
   end
 
-  def self.create(url)
+  def self.create(url, title)
     return false unless valid_url?(url)
-    @@conn.exec( "INSERT INTO bookmarks (url) VALUES ('#{url}')")
+    rs = @@conn.exec("INSERT INTO bookmarks (url, title) VALUES ('#{url}', '#{title}')
+                      RETURNING id, url, title;")
+    Bookmark.new(rs[0]['id'], rs[0]['url'], rs[0]['title'])
   end
 
   private

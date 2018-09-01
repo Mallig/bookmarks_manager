@@ -5,7 +5,7 @@
 </head>
 
 <body>
-  
+
   <% flash.keys.each do |type| %>
     <div data-alert class="flash <%= type %> alert-box radius">
       <%= flash[type] %>
@@ -13,9 +13,11 @@
     </div>
   <% end %>
 
-  <form action="/save_bookmark" method="POST">
+  <form action="/bookmarks/new" method="POST">
     <label for="url">Enter a url to save:</label>
     <input type="text" name='url'>
+    <label for="title">URL title:</label>
+    <input type="text" name='title'>
     <input type="submit" value="Save URL">
   </form>
 

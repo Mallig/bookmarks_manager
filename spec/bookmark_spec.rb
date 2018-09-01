@@ -12,24 +12,24 @@ describe Bookmark do
     end
   end
 
-  it 'can read from a database' do
-    add_test_bookmarks
-    expect(Bookmark.all[0]).to include 'http://www.makersacademy.com'
-    expect(Bookmark.all[1]).to include 'http://www.google.com'
-    expect(Bookmark.all[2]).to include 'http://www.reddit.com'
+  describe '.all' do
+    it 'lists saved bookmarks' do
+      add_test_bookmarks
+      expect(Bookmark.all[0].title).to eq 'Makers Academy'
+      expect(Bookmark.all[1].title).to eq 'Google'
+      expect(Bookmark.all[2].title).to eq 'Reddit'
+    end
   end
-  
-  it 'can add to a database' do
-    Bookmark.create("http://www.makersacademy.com")
-    expect(Bookmark.all[0]).to include 'http://www.makersacademy.com'
-  end
-# 
-# it 'can update database entries' do
-#
-# end
-# 
-# it 'can delete database entries' do
-#   
-# end
+
+  describe '.create' do
+    it 'adds a bookmark to database' do
+      example_bookmark = Bookmark.create("http://www.makersacademy.com", "Makers Academy")
+      
+      expect(example_bookmark).to be_a Bookmark
+      expect(example_bookmark.title).to eq 'Makers Academy'
+      expect(example_bookmark.url).to eq 'http://www.makersacademy.com'
+    end
+  end 
+
 
 end

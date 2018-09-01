@@ -18,9 +18,11 @@ class BookmarkManager < Sinatra::Base
     erb(:bookmarks)
   end
   
-  post '/save_bookmark' do
-    flash[:notice] = "Invalid URL" unless Bookmark.create(params['url'])
+  post '/bookmarks/new' do
+    flash[:notice] = "Invalid URL" unless Bookmark.create(params['url'], params['title'])
     redirect '/'
   end
+
+  run! if app_file == $0
 
 end
